@@ -59,5 +59,58 @@ $(document).ready(function () {
             }
         });
     });
+    //delete a product
+    function delete_function(){
+        $("#product_table").addClass("d-block");
+        $.ajax({
+            type: "get",
+            url: "delete_product",
+            success: function (response) {
+                $("tbody").html("");
+                $.each(response.data, function (key, value) { 
+                    $("tbody").append('<tr>\
+                    <td>'+value.id+'</td>\
+                    <td>'+value.Name+'</td>\
+                    <td>'+value.Color+'</td>\
+                    <td>'+value.Quantity+'</td>\
+                    <td>'+value.Description+'</td>\
+                    <td><button value='+value.id+'  class="btn-primary delete_product_item">Delete</button></td>\
+                    </tr>');
+                });
+               
+            }
+        });
+    }
+    $(document).on("click","#delete_product", function (e) {
+        e.preventDefault();
+        delete_function();
+    });
+     //deleting product item
+    $(document).on("click",".delete_product_item", function (e) {
+        e.preventDefault();
+        var id=$(this).val();
+        //alert(id);
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "delete",
+            url: "/delete_data/"+id,
+            success: function (response) {
+                if(response.status==200){
+                    $("#message").removeClass("alert alert-danger");
+                    $("#message").addClass("alert alert-success");
+                    $("#message").text(response.message);
+                }else{
+                    $("#message").removeClass("alert alert-success");
+                    $("#message").addClass("alert alert-danger");
+                    $("#message").text(response.message);
+                }
+                delete_function();
+            }
+        });
+    });
 
 });

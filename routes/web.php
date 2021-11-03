@@ -34,3 +34,6 @@ Route::get("/edit_product",[admin_controller::class,"edit_product"]);
 Route::post("/fetch_edit_product",[admin_controller::class,"fetch_edit_product"]);
 //root for update the table
 Route::post("/edit_product_data",[admin_controller::class,"edit_product_data"]);
+//root for delete
+Route::get("/delete_product",[admin_controller::class,"delete_product"]);
+Route::delete("/delete_data/{id}",[admin_controller::class,"delete_data"]);

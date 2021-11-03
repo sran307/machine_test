@@ -42,7 +42,7 @@ Edit product form
         <div class="row form-group">
             <label for="product quantity" class="col-sm-2">AVAILABLE QUANTITY</label>
             <div class="col-md-5">
-                <input type="text" name="product_quantity" id="availablegit_quantity" class="form-control" placeholder="Enter the quantity" required>
+                <input type="text" name="product_quantity" id="available_quantity" class="form-control" placeholder="Enter the quantity" required>
             </div>
         </div>
         <div class="row form-group">

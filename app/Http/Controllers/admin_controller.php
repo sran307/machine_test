@@ -138,4 +138,35 @@ class admin_controller extends Controller
             return back()->with("error_message","Cannot update the product");
         }
     }
+    //fetch data for delete
+    public function delete_product(){
+        $data=Product::all();
+        return response()->json([
+            "data"=>$data
+        ]);
+    }
+    public function delete_data($id){
+        DB::beginTransaction();
+        try{
+            $delete=Product::where("id",$id)->delete();
+            DB::commit();
+            if($delete){
+                return response()->json([
+                    "status"=>200,
+                    "message"=>"Product deleted successfully"
+                ]);
+            }else{
+                return response()->json([
+                    "status"=>400,
+                    "message"=>"Cannot delete the product"
+                ]);
+            }
+        }catch(\Exception $e){
+            DB::rollback();
+            return response()->json([
+                "status"=>400,
+                "message"=>"Cannot delete the product"
+            ]);
+        }
+    }
 }
