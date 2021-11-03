@@ -37,3 +37,5 @@ Route::post("/edit_product_data",[admin_controller::class,"edit_product_data"]);
 //root for delete
 Route::get("/delete_product",[admin_controller::class,"delete_product"]);
 Route::delete("/delete_data/{id}",[admin_controller::class,"delete_data"]);
+//product listing root
+Route::get("/product_list",[admin_controller::class,"product_list"]);

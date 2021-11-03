@@ -169,4 +169,9 @@ class admin_controller extends Controller
             ]);
         }
     }
+    //product listing
+    public function product_list(){
+        $data=Product::all();
+        return view("product_list",["data"=>$data]);
+    }
 }

@@ -11,7 +11,7 @@ inventory
         <a href="add_product"><button class="border-button">add product</button></a>
         <a href="edit_product"><button class="border-button">edit product</button></a>
         <button id="delete_product" class="border-button">delete product</button>
-        <button class="border-button">product list</button>
+        <a href="product_list"><button class="border-button">product list</button></a>
     </div>
     <div>
         <p id="message"></p>
