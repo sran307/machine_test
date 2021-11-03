@@ -70,6 +70,10 @@ input[placeholder],textarea[placeholder]{
     display: flex;
     justify-content: center;
 }
+.return-button{
+    display: flex;
+    justify-content: space-around;
+}
 #footer{
     height: 30vh;
     text-align: center;

@@ -49,6 +49,10 @@ class admin_controller extends Controller
                     "message"=>"welcome admin"
 
                 ]);
+            }elseif($password==null){
+                return response()->json([
+                    "message"=>"please enter the password"
+                ]);
             }else{
                 return response()->json([
                     "message"=>"passwords are not matching"
@@ -88,7 +92,50 @@ class admin_controller extends Controller
             DB::rollback();
             return back()->with("error_message","process terminated.");
         }
-        
-
+    }
+    //edit product function for form
+    public function edit_product(){
+        $data=Product::all();
+        return view("edit_product",["data"=>$data]);
+    }
+    //fetching data for the corresponding product id and passing it
+    public function fetch_edit_product(Request $request){
+        $id=$request->post("id");
+        $product_data=Product::where("id",$id)->get();
+        foreach($product_data as $value){
+            $name=$value->Name;
+            $color=$value->Color;
+            $quantity=$value->Quantity;
+            $description=$value->Description;
+        }
+        return response()->json([
+            "name"=>$name,
+            "color"=>$color,
+            "quantity"=>$quantity,
+            "description"=>$description
+        ]);
+    }
+    //updating the table
+    public function edit_product_data(Request $request){
+        $id=$request->post("product_id");
+        //dd($id);
+        DB::beginTransaction();
+        try{
+            $update=Product::where("id",$id)->update([
+                "Name"=>$request->post("product_name"),
+                "Color"=>$request->post("product_color"),
+                "Quantity"=>$request->post("product_quantity"),
+                "Description"=>$request->post("product_description")
+            ]);
+            DB::commit();
+            if($update){
+                return back()->with("success_message","product updated");
+            }else{
+                return back()->with("error_message","Cannot update the product");
+            }
+        }catch(\Exception $e){
+            DB::rollback();
+            return back()->with("error_message","Cannot update the product");
+        }
     }
 }

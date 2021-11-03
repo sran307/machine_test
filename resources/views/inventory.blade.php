@@ -9,8 +9,9 @@ inventory
     </div>
     <div id="admin-buttons">
         <a href="add_product"><button class="border-button">add product</button></a>
-        <button class="border-button">edit product</button>
+        <a href="edit_product"><button class="border-button">edit product</button></a>
         <button class="border-button">delete product</button>
         <button class="border-button">product list</button>
+
     </div>
 @endsection

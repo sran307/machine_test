@@ -35,18 +35,18 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body bg-dark">
                             <label for="password">This is for admin </label>
                             <input type="password" id="admin_password" placeholder="Enter your password">
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-dark">close</button>
+                        <div class="modal-footer bg-dark">
+                            <button type="button" class="btn btn-light">close</button>
                             <button type="button" id="login" class="btn btn-primary">Login</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <p id="message"></p>
+            <p id="message" class="my-4"></p>
         </div>
     </header>
     <!--end of header-->
