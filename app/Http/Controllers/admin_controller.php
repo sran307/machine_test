@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
+//admin table
 use App\Models\admin;
-
+//product table
+use App\Models\Product;
 class admin_controller extends Controller
 {
     public function admin_page(){
@@ -64,5 +66,29 @@ class admin_controller extends Controller
         }
         session()->put("admin_id",$id);
         return view("admin_panel",["name"=>$name]);
+    }
+    //function for adding product
+    public function add_product_form(Request $request){
+        DB::beginTransaction();
+        try{
+            //fetching data from form and create a row in table 
+            $add_product=Product::create([
+                "Name"=>$request->post("product_name"),
+                "Color"=>$request->post("product_color"),
+                "Quantity"=>$request->post("available_quantity"),
+                "Description"=>$request->post("product_description")
+            ]);
+            DB::commit();
+            if($add_product){
+                return back()->with("success_message","Product added successfully.");
+            }else{
+                return back()->with("error_message","Product cannot added.");
+            }
+        }catch(\Exception $e){
+            DB::rollback();
+            return back()->with("error_message","process terminated.");
+        }
+        
+
     }
 }

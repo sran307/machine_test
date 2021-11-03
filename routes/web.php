@@ -18,3 +18,13 @@ Route::get('/', [admin_controller::class,"admin_page"]);
 Route::post("/admin",[admin_controller::class,"admin"]);
 //root for registration page
 Route::get("admin_panel",[admin_controller::class,"admin_panel"]);
+//root for inventory page
+Route::get("inventory",function(){
+    return view("inventory");
+});
+//root for adding product form
+Route::get("add_product",function(){
+    return view("add_product");
+});
+//root for adding product
+Route::post("add_product_form",[admin_controller::class,"add_product_form"]);
