@@ -112,5 +112,79 @@ $(document).ready(function () {
             }
         });
     });
+    //adding new user
+    $(document).on("click","#add-user-button", function (e) {
+        e.preventDefault();
+        //check box values
+        var val=[];
+        $(":checkbox:checked").each(function(i){
+            val[i]=$(this).val();
+        })
+        var data={
+            "name":$("input[name='user_name']").val(),
+            "email":$("input[name='email_id']").val(),
+            "password":$("input[name='password']").val(),
+            "gender":$("input[name='gender']").val(),
+            "user_role":val
+        }
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "post",
+            url: "/add_user_data",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                //console.log(response.errors);
+                if(response.status==400){
+                    $(".error").html("");
+                    if(response.errors.name!=undefined){
+                        $(".error1").addClass("alert alert-danger");
+                        $(".error1").text(response.errors.name);
+                    }else{
+                        $(".error1").removeClass("alert alert-danger");
+                    }
+                    if(response.errors.email!=undefined){
+                        $(".error2").addClass("alert alert-danger");
+                        $(".error2").text(response.errors.email);
+                    }else{
+                        $(".error2").removeClass("alert alert-danger");
+                    }
+                    if(response.errors.password!=undefined){
+                        $(".error3").addClass("alert alert-danger");
+                        $(".error3").text(response.errors.password);
+                    }else{
+                        $(".error3").removeClass("alert alert-danger");
+                    }
+                    if(response.errors.gender!=undefined){
+                        $(".error4").addClass("alert alert-danger");
+                        $(".error4").text(response.errors.gender);
+                    }else{
+                        $(".error4").removeClass("alert alert-danger");
+                    }
+                    if(response.errors.user_role!=undefined){
+                        $(".error5").addClass("alert alert-danger");
+                        $(".error5").text(response.errors.user_role);
+                    }else{
+                        $(".error5").removeClass("alert alert-danger");
+                    };
+                }else if(response.status==200){
+                    $(".message").removeClass("alert alert-danger");
+                    $(".message").addClass("alert alert-success");
+                    $(".message").text(response.message);
+                }else if(response.status==404){
+                    $(".message").removeClass("alert alert-success");
+                    $(".message").addClass("alert alert-danger");
+                    $(".message").text(response.message);
+                }
+
+            },error:function(xhr){
+                console.log(xhr.responseText);
+            }
+        });
+    });
 
 });

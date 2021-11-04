@@ -10,7 +10,7 @@ Admin Panel
     <div id="admin-buttons">
         <a href="inventory"><button class="border-button">inventory management</button></a>
         <button class="border-button">expense management</button>
-        <button class="border-button">add user</button>
+        <a href="add_user"><button class="border-button">add user</button></a>
         <a href="/"><button class="border-button">Home</button></a>
     </div>
 </section>

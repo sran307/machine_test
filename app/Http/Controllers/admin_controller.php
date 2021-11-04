@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\admin;
 //product table
 use App\Models\Product;
+//user table
+use App\Models\user_data;
 class admin_controller extends Controller
 {
     public function admin_page(){
@@ -173,5 +175,70 @@ class admin_controller extends Controller
     public function product_list(){
         $data=Product::all();
         return view("product_list",["data"=>$data]);
+    }
+    //add user
+    public function add_user_data(Request $request){
+        $email=$request->post("email");
+        //password is encrypting
+        $password=md5($request->post("password"));
+        //json encoding array value
+        $user_role=$request->post("user_role");
+        $enc_user_role=json_encode($user_role);
+        $validator=Validator::make($request->all(),[
+            "name"=>"required",
+            "email"=>"required",
+            "password"=>"required",
+            "gender"=>"required",
+            "user_role"=>"required"
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                "status"=>400,
+                "errors"=>$validator->messages()
+            ]);
+        }else{
+            //add user data to the database
+            //take the email as unique 
+            //check the email id exists or not
+            //if exists abort the creation otherwise create
+            $data=user_data::where("email",$email)->get();
+            if(count($data)>0){
+                return response()->json([
+                    "status"=>404,
+                    "message"=>"email id exists. Try another one.",
+                ]);
+            }else{
+                DB::beginTransaction();
+                try{
+                    $user_creation=user_data::create([
+                        "Name"=>$request->post("name"),
+                        "Email"=>$request->post("email"),
+                        "Password"=>$password,
+                        "Gender"=>$request->post("gender"),
+                        "User_rol"=>$enc_user_role
+                    ]);
+                    DB::commit();
+                    if($user_creation){
+                        return response()->json([
+                            "status"=>200,
+                            "message"=>"User created successfully"
+                        ]);
+                    }else{
+                        return response()->json([
+                            "status"=>404,
+                            "message"=>"Cannot create the user"
+                        ]);
+                    }
+                }catch(\Exception $e){
+                    DB::rollback();
+                    return response()->json([
+                        "status"=>404,
+                        "message"=>"Terminate the creation process"
+                    ]);
+                }
+                
+            }
+           
+        }
     }
 }

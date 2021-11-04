@@ -12,6 +12,7 @@ inventory
         <a href="edit_product"><button class="border-button">edit product</button></a>
         <button id="delete_product" class="border-button">delete product</button>
         <a href="product_list"><button class="border-button">product list</button></a>
+        <a href="/admin_panel"><button class="border-button">return back</button></a>
     </div>
     <div>
         <p id="message"></p>

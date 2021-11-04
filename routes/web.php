@@ -39,3 +39,8 @@ Route::get("/delete_product",[admin_controller::class,"delete_product"]);
 Route::delete("/delete_data/{id}",[admin_controller::class,"delete_data"]);
 //product listing root
 Route::get("/product_list",[admin_controller::class,"product_list"]);
+//root for adding user
+Route::get("/add_user",function(){
+    return view("add_user");
+});
+Route::post("/add_user_data",[admin_controller::class,"add_user_data"]);
