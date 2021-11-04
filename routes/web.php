@@ -14,6 +14,9 @@ use App\Http\Controllers\admin_controller;
 */
 //root for home default page
 Route::get('/', [admin_controller::class,"admin_page"]);
+Route::get("/",function(){
+    return view("home");
+});
 //setting root for adding user 
 Route::post("/admin",[admin_controller::class,"admin"]);
 //root for registration page
@@ -44,3 +47,8 @@ Route::get("/add_user",function(){
     return view("add_user");
 });
 Route::post("/add_user_data",[admin_controller::class,"add_user_data"]);
+//user login page root
+Route::get("/user_login",function(){
+    return view("user_login");
+});
+Route::post("/user_login_form",[admin_controller::class,"user_login_form"]);

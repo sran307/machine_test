@@ -92,5 +92,10 @@ Add user
             <button id="add-user-button" class="btn btn-outline-primary">Add User</button>
         </div>
     </form>
+    <div class="return-button">
+        <a href="/admin_panel"><button class="border-button">admin panel</button></a>
+        <a href="/"><button class="border-button">Home</button></a>
+        <a href="/inventory"><button class="border-button">return back</button></a>
+    </div>
 </section>
 @endsection

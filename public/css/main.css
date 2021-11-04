@@ -1,7 +1,7 @@
 *{
     box-sizing: border-box;
 }
-h1,h2,h5{
+h1,h2,h5,h6{
     text-transform: uppercase;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 600;
@@ -13,6 +13,21 @@ h1,h2,h5{
     background-color: rgb(124, 124, 245);
     height: 50vh;
     padding-top: 20vh;
+}
+#home{
+    background-color: rgb(98, 98, 133);
+    color: rgb(200,200,200);
+    font-size: large;
+    font-weight: 600;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+    text-align: center;
+    height: 100px;
+    padding-top: 2.5%;
+    width: 60%;
+    margin-left:20%;
+    box-shadow: 5px 5px 5px rgb(3, 3, 61);
+    text-shadow: 5px 5px 5px rgb(3, 3, 61);
 }
 .section{
     background-color: rgb(190,190,255);

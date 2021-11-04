@@ -34,4 +34,5 @@ inventory
             </tbody>
         </table>
     </div>
+</section>
 @endsection

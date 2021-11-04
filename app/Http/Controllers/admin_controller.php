@@ -14,8 +14,9 @@ use App\Models\user_data;
 class admin_controller extends Controller
 {
     public function admin_page(){
-        if(session()->has("admin_id")){
+        if((session()->has("admin_id")) || (session()->has("user_id"))){
             session()->pull("admin_id");
+            session()->pull("user_id");
         }
         return view("layout");
     }
@@ -239,6 +240,28 @@ class admin_controller extends Controller
                 
             }
            
+        }
+    }
+    //user login
+    public function user_login_form(Request $request){
+        $email=$request->post("user_email");
+        $password=md5($request->post("user_password"));
+        //checking whether the email and password are matching
+        $user_email_data=user_data::where("Email",$email)->where("Password",$password)->get();
+        //dd(count($user_email_data));
+        if(count($user_email_data)>0){
+            foreach($user_email_data as $value){
+                $user_id=$value->id;
+                $user_role=$value->User_rol;
+            }
+            if(session()->has("user_id")){
+                session()->pull("user_id");
+            }
+            session()->put("user_id",$user_id);
+            //dd(session());
+            return view("dashboard",["user_role"=>json_decode($user_role)]);
+        }else{
+            return back()->with("message","Email id or password is not matching.");
         }
     }
 }

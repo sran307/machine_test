@@ -44,7 +44,7 @@ add product
             <button type="submit" class="border-button">add product</button>
         </div>
     </form>
-    <div class="return-button">
+    <div class="return-button my-4">
         <a href="/admin_panel"><button class="border-button">admin panel</button></a>
         <a href="/"><button class="border-button">Home</button></a>
         <a href="/inventory"><button class="border-button">return back</button></a>

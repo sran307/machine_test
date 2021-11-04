@@ -22,8 +22,11 @@
         <div>
             <!--button for showing a modal pop up-->
             <!--if admin is entered we do not need this button so hide it-->
-            @if(!session("admin_id"))
+            @if(!session("admin_id") && !session("user_id"))
                 <button class="border-button button1" data-toggle="modal" data-target="#admin_modal">admin panel</button>
+            @endif
+            @if(!session("user_id"))
+                <a href="user_login"><button class="border-button mx-4">user login</button></a>
             @endif
             <!--creating a modal for verify the admin-->
             <div class="modal fade" id="admin_modal">
