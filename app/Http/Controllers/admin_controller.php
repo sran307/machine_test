@@ -14,11 +14,18 @@ use App\Models\user_data;
 class admin_controller extends Controller
 {
     public function admin_page(){
-        if((session()->has("admin_id")) || (session()->has("user_id"))){
+        if((session()->has("admin_id"))||(session()->has("user_id"))){
             session()->pull("admin_id");
             session()->pull("user_id");
         }
         return view("layout");
+    }
+    public function home_page(){
+        if((session()->has("admin_id")) || (session()->has("user_id"))){
+            session()->pull("admin_id");
+            session()->pull("user_id");
+        }
+        return view("home");
     }
     public function admin(Request $request){
         //fetching data from database and compare the passwords

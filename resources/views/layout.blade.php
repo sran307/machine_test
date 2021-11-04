@@ -25,7 +25,7 @@
             @if(!session("admin_id") && !session("user_id"))
                 <button class="border-button button1" data-toggle="modal" data-target="#admin_modal">admin panel</button>
             @endif
-            @if(!session("user_id"))
+            @if(!session("user_id") && !session("admin_id"))
                 <a href="user_login"><button class="border-button mx-4">user login</button></a>
             @endif
             <!--creating a modal for verify the admin-->

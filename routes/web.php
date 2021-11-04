@@ -14,9 +14,7 @@ use App\Http\Controllers\admin_controller;
 */
 //root for home default page
 Route::get('/', [admin_controller::class,"admin_page"]);
-Route::get("/",function(){
-    return view("home");
-});
+Route::get("/",[admin_controller::class,"home_page"]);
 //setting root for adding user 
 Route::post("/admin",[admin_controller::class,"admin"]);
 //root for registration page
