@@ -11,6 +11,9 @@ use App\Models\admin;
 use App\Models\Product;
 //user table
 use App\Models\user_data;
+//expense table
+use App\Models\expense;
+
 class admin_controller extends Controller
 {
     public function admin_page(){
@@ -269,6 +272,22 @@ class admin_controller extends Controller
             return view("dashboard",["user_role"=>json_decode($user_role)]);
         }else{
             return back()->with("message","Email id or password is not matching.");
+        }
+    }
+    //inserting expense
+    public function expense_form(Request $request){
+        DB::beginTransaction();
+        try{
+            $insert_date=expense::create([
+                "Date"=>$request->post("date"),
+                "Reason"=>$request->post("expense"),
+                "Amount"=>$request->post("amount")
+            ]);
+            DB::commit();
+            return back()->with("success_message","Expense added successfully");
+        }catch(\Exception $e){
+            DB::rollback();
+            return back()->with("error_message","Expense cannot added");
         }
     }
 }

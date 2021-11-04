@@ -18,9 +18,13 @@ dashboard
             <a href="product_list"><button class="border-button">product list</button></a>
         @endif
         @if(in_array("expense_control",$user_role))
-            <a href="/admin_panel"><button class="border-button">return back</button></a>
+            <a href="/expense"><button class="border-button">Expense</button></a>
         @endif
+       
+    </div>
+    <div class="d-flex justify-content-around my-3">
         <a href="/"><button class="border-button">Logout</button></a>
+        <a href="/admin_panel"><button class="border-button">return back</button></a>
     </div>
     <div>
         <p id="message"></p>

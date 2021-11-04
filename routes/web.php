@@ -50,3 +50,8 @@ Route::get("/user_login",function(){
     return view("user_login");
 });
 Route::post("/user_login_form",[admin_controller::class,"user_login_form"]);
+//expense
+Route::get("/expense",function(){
+    return view("expense");
+});
+Route::post("/expense_form",[admin_controller::class,"expense_form"]);
