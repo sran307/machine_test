@@ -290,4 +290,10 @@ class admin_controller extends Controller
             return back()->with("error_message","Expense cannot added");
         }
     }
+    //find out the total expense
+    public function total_expense(){
+        $sum=expense::sum("amount");
+        //dd($sum);
+        return back()->with("data",$sum);
+    }
 }

@@ -9,6 +9,11 @@ expense
         <a href="total_expense"><button class="border-button">total expense</button></a>
         <a href="/"><button class="border-button">Logout</button></a>
     </div>
+    @if(session()->has("data"))
+    <div class="alert alert-light my-2">
+        <p>Your total expense is {{session()->get("data")}}
+    </div>
+    @endif
     @if(session()->has("success_message"))
     <div class="alert alert-success">
         {{session()->get("success_message")}}

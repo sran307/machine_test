@@ -55,3 +55,4 @@ Route::get("/expense",function(){
     return view("expense");
 });
 Route::post("/expense_form",[admin_controller::class,"expense_form"]);
+Route::get("/total_expense",[admin_controller::class,"total_expense"]);
